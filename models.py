@@ -9,6 +9,7 @@ def connect_db(app):
     db.init_app(app)
 
 class User(db.Model):
+    """blogly user"""
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, 
@@ -25,6 +26,5 @@ class User(db.Model):
 
     def __repr__(self):
         u = self
-        return f"<User id ={user.id} first_name={u.first_name} last_name={u.last_name}>"
+        return f"<User id ={u.id} first_name={u.first_name} last_name={u.last_name}>"
     
-    db.create_all()

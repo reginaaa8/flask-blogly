@@ -17,6 +17,11 @@ connect_db(app)
 
 @app.route('/')
 def home_page():
-    """shows home page"""
+    """redirect to list of users (for now)"""
+    return redirect('/users')
+
+@app.route('/users')
+def list_users():
+    "list all users"
     users = User.query.all()
-    return render_template('base.html', users=users)
+    return render_template("users.html", users=users)
