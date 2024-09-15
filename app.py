@@ -1,6 +1,6 @@
 """Blogly application."""
 
-from flask import Flask, render_template, redirect, flash, session
+from flask import Flask, request, render_template, redirect, flash, session
 from flask_debugtoolbar import DebugToolbarExtension
 from models import db, connect_db, User
 
@@ -30,3 +30,16 @@ def list_users():
 def add_user():
     """show form to add a new user"""
     return render_template('new_user.html')
+
+@app.route("/users/new", methods=["POST"])
+def handle_form_submission():
+    """process form data to add new user to databse"""
+    first_name = request.form["first_name"]
+    last_name = request.form["last_name"]
+    image_url = request.form["image_url"]
+
+    new_user  = User(first_name=first_name, last_name=last_name, image_url=image_url)
+    db.session.add(new_user)
+    db.session.commit()
+
+    return redirect('/users')
