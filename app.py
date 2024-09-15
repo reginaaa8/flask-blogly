@@ -22,6 +22,11 @@ def home_page():
 
 @app.route('/users')
 def list_users():
-    "list all users"
+    """list all userrs"""
     users = User.query.all()
     return render_template("users.html", users=users)
+
+@app.route('/users/new')
+def add_user():
+    """show form to add a new user"""
+    return render_template('new_user.html')
