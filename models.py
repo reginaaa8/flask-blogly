@@ -24,5 +24,7 @@ class User(db.Model):
     image_url = db.Column(db.String)
 
     def __repr__(self):
-        user = self
-        return f"<User id ={user.id} first_name={user.first_name} last_name={user.last_name}>"
+        u = self
+        return f"<User id ={user.id} first_name={u.first_name} last_name={u.last_name}>"
+    
+    db.create_all()
