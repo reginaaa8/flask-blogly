@@ -11,6 +11,7 @@
 <h1>{{user.first_name}} {{user.last_name}}</h1>
 <img src="{{user.image_url}}">
 <a href="/users/{{user.id}}/edit"><button>Edit User</button></a>
-<button>Delete</button>
+
+<form action="/users/{{user.id}}/delete" method="POST"><button>Delete</button></form>
 
 {% endblock %}
