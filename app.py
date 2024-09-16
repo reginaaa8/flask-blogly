@@ -32,7 +32,7 @@ def add_user():
     return render_template('new_user.html')
 
 @app.route("/users/new", methods=["POST"])
-def handle_form_submission():
+def handle_new_user_form():
     """process form data to add new user to databse"""
     first_name = request.form["first_name"]
     last_name = request.form["last_name"]
@@ -45,7 +45,27 @@ def handle_form_submission():
     return redirect('/users')
 
 @app.route("/users/<int:user_id>")
-def show_pet(user_id):
+def show_user(user_id):
     """Show details about a single pet"""
     user = User.query.get_or_404(user_id)
     return render_template("details.html", user=user)
+
+@app.route("/users/<int:user_id>/edit")
+def edit_user(user_id):
+    """edit user details"""
+    user = User.query.get_or_404(user_id)
+    return render_template('edit_user.html', user=user)
+
+@app.route("/users/<int:user_id>/edit", methods=["POST"])
+def handle_edit_user_form(user_id):
+    """process form to edit user data"""
+
+    user = User.query.get_or_404(user_id)
+    user.first_name = request.form["first_name"]
+    user.last_name = request.form["last_name"]
+    user.image_url = request.form["image_url"]
+
+    db.session.add(user)
+    db.session.commit()
+
+    return redirect('/users')
