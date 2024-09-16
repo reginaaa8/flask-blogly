@@ -43,3 +43,9 @@ def handle_form_submission():
     db.session.commit()
 
     return redirect('/users')
+
+@app.route("/users/<int:user_id>")
+def show_pet(user_id):
+    """Show details about a single pet"""
+    user = User.query.get_or_404(user_id)
+    return render_template("details.html", user=user)
