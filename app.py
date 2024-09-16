@@ -69,3 +69,4 @@ def handle_edit_user_form(user_id):
     db.session.commit()
 
     return redirect('/users')
+
