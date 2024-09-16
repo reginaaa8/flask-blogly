@@ -38,7 +38,7 @@ def handle_form_submission():
     last_name = request.form["last_name"]
     image_url = request.form["image_url"]
 
-    new_user  = User(first_name=first_name, last_name=last_name, image_url=image_url)
+    new_user  = User(first_name=first_name, last_name=last_name, image_url=image_url or None)
     db.session.add(new_user)
     db.session.commit()
 
