@@ -5,15 +5,27 @@
 <h1>Add a New User</h1>
 
 <form action="/users/new" method="POST">
-    <label for="first_name">First Name: </label>
-    <input id="first_name" name= "first_name" type="text" placeholder="Enter a first name">
 
-    <label for="last_name">Last Name: </label>
-    <input id="last_name" name= "last_name" type="text" placeholder="Enter a last name">
+    <div class="mb-3">
+        <label for="first_name" class="form-label">First Name: </label>
+        <input id="first_name" name= "first_name" class="form-control" type="text" placeholder="Enter a first name">
+    </div>
 
-    <label for="image_url">Profile Picture URL: </label>
-    <input id="image_url" name="image_url" type="text" placeholder="Provide an image of this user">
-    <button>Add User</button>
+    <div class="mb-3">
+        <label for="last_name" class="form-label">Last Name: </label>
+        <input id="last_name" name= "last_name" class="form-control" type="text" placeholder="Enter a last name">
+    </div>
+
+    <div class="mb-3">
+        <label for="image_url" class="form-label">Image URL: </label>
+        <input id="image_url" name="image_url" class="form-control" type="text" placeholder="Provide an image of this user">
+    </div>
+
+    <div>
+        <button type="submit" class="btn btn-success">Add</button>
+    </div>
+
 </form>
+
 
 {% endblock %}
