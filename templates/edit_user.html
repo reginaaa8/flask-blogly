@@ -21,10 +21,11 @@
         <input id="image_url" name="image_url" class="form-control" type="text" value={{user.image_url}}>
     </div>
 
-    <a href="/users/{{user.id}}">
-        <button type="button" class="btn btn-outline-primary">Cancel</button>
-    </a>
-    <button type="submit" class="btn btn-success">Save</button>
+
+    <div class="d-flex flex-row-reverse" style="gap: .125rem;">
+        <a class="btn btn-outline-primary" role="button" href="/users/{{user.id}}">Cancel</a>
+        <button type="submit" class="btn btn-success">Save</button>
+    </div>
     
 </form>
 
