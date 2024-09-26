@@ -84,3 +84,20 @@ def create_post(user_id):
     """show form to create a new post"""
     user = User.query.get_or_404(user_id)
     return render_template("new_post.html", user=user)
+
+@app.route("/users/<int:user_id>/posts/new", methods=["POST"])
+def handle_new_post_form(user_id):
+    """process form to add user's new post"""
+    user = User.query.get_or_404(user_id)
+    
+    title = request.form["title"]
+    content = request.form["content"]
+
+    new_post = Post(title=title,
+                    content=content,
+                    user_id=user.id)
+    db.session.add(new_post)
+    db.session.commit()
+
+    return redirect(f"/users/{user.id}")
+    
