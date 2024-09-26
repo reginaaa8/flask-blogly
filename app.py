@@ -48,7 +48,7 @@ def handle_new_user_form():
 def show_user(user_id):
     """Show details about a single pet"""
     user = User.query.get_or_404(user_id)
-    return render_template("details.html", user=user)
+    return render_template("user_details.html", user=user)
 
 @app.route("/users/<int:user_id>/edit")
 def edit_user(user_id):
