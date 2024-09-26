@@ -100,4 +100,10 @@ def handle_new_post_form(user_id):
     db.session.commit()
 
     return redirect(f"/users/{user.id}")
+
+@app.route("/posts/<int:post_id>")
+def show_post(post_id):
+    """show the details of a post"""
+    post = Post.query.get_or_404(post_id)
+    return render_template("post_details.html", post=post)
     
