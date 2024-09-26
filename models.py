@@ -29,6 +29,7 @@ class User(db.Model):
     image_url = db.Column(db.String, 
                           nullable=True, 
                           default=default_img)
+    posts = db.relationship("Post", backref="user", cascade="all, delete-orphan")
 
     def __repr__(self):
         u = self
