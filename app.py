@@ -78,3 +78,9 @@ def delete_user(user_id):
 
     db.session.commit()
     return redirect('/users')
+
+@app.route("/users/<int:user_id>/posts/new")
+def create_post(user_id):
+    """show form to create a new post"""
+    user = User.query.get_or_404(user_id)
+    return render_template("new_post.html", user=user)
