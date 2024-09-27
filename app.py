@@ -106,4 +106,34 @@ def show_post(post_id):
     """show the details of a post"""
     post = Post.query.get_or_404(post_id)
     return render_template("post_details.html", post=post)
+
+@app.route("/posts/<int:post_id>/edit")
+def edit_post(post_id):
+    """show form to edit a post"""
+    post = Post.query.get_or_404(post_id)
+    return render_template("edit_post.html", post=post)
+
+@app.route("/posts/<int:post_id>/edit", methods=["POST"])
+def handle_edit_post_form(post_id):
+    """handle form submission for editing a post"""
+    post = Post.query.get_or_404(post_id)
+    post.title = request.form["title"]
+    post.content = request.form["content"]
+
+    db.session.add(post)
+    db.session.commit()
+
+    return redirect(f"/posts/{post.id}")
+
+@app.route("/posts/<int:post_id>", methods=["POST"])
+def delete_post(post_id):
+    """deleted post"""
+    post = Post.query.get_or_404(post_id)
+    db.session.delete(post)
+    db.session.commit()
+
+    return redirect(f"/users/{post.user_id}")
+
+
+
     

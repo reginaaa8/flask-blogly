@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %} New Post {% endblock %}
+{% block content %}
+
+<h1>Edit Post</h1>
+
+<form action="" method="POST">
+
+    <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input id="title" name="title" class="form-control" type="text" value="{{post.title}}">
+    </div>
+
+    <div class="mb-3">
+        <label for="Content" class="form-label">Post Content</label>
+        <input id="content" name="content" class="form-control" type="text" value="{{post.content}}">
+    </div>
+
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <a href="" class="btn btn-outline-info">Cancel</a>
+        <button type="submit" class="btn btn-success">Edit</button>
+    </div>
+
+</form>
+
+
+{% endblock %}
