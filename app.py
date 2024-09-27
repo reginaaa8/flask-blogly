@@ -1,6 +1,6 @@
 """Blogly application."""
 
-from flask import Flask, request, render_template, redirect, flash, session
+from flask import Flask, request, render_template, redirect
 from flask_debugtoolbar import DebugToolbarExtension
 from models import db, connect_db, User, Post
 
@@ -133,7 +133,3 @@ def delete_post(post_id):
     db.session.commit()
 
     return redirect(f"/users/{post.user_id}")
-
-
-
-    
