@@ -60,7 +60,17 @@ class Post(db.Model):
     def __repr__(self):
             p = self
             return f"<id ={p.id} title={p.title} created_at={p.created_at} user_id={p.user_id}>"
-    
+
+ class PostTag(db.Model):
+     """tag for a post"""
+     __tablename__ = "posts_tags"
+
+     post_id = db.Column(db.Integer, 
+                         db.ForeignKey('posts.id'), primary_key=True)
+     tag_id = db.Column(db.Integer, 
+                        db.ForeignKey('tags.id'), 
+                        primary_key=True)
+
 class Tag(db.Model):
      """tags for posts"""
      __tablename__ = 'tags'
