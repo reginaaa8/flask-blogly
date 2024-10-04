@@ -78,4 +78,8 @@ class Tag(db.Model):
           secondary="posts_tags",
           backref="tags"
      )
+
+    def __repr__(self):
+        t = self
+        return f"<id ={t.id} tag_name={t.tag_name}>"
     
