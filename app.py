@@ -162,4 +162,13 @@ def handle_new_tag_form():
     db.session.commit()
 
     return redirect("/tags")
+
+@app.route("/tags/<int:id>/edit")
+def edit_tag(id):
+    "show form to edit tag details"
+    tag = Tag.query.get_or_404(id)
+
+    return render_template("edit_tag.html", tag=tag)
+
+
     
