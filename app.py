@@ -145,3 +145,8 @@ def show_tag_details(id):
     """show details about a tag"""
     tag = Tag.query.get_or_404(id)
     return render_template("tag_details.html", tag=tag)
+
+@app.route("/tags/new")
+def new_tag():
+    """show form to add a new tag"""
+    return render_template("new_tag.html")
