@@ -170,5 +170,16 @@ def edit_tag(id):
 
     return render_template("edit_tag.html", tag=tag)
 
+@app.route("/tags/<int:id>/edit", methods=["POST"])
+def handle_edit_tag_form(id):
+    """handle form submission to edit a tag"""
+
+    tag = Tag.query.get_or_404(id)
+    tag.tag_name = request.form["tag_name"]
+
+    db.session.add(tag)
+    db.session.commit()
+
+    return redirect("/tags")
 
     
