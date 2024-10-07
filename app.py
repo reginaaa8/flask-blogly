@@ -134,8 +134,14 @@ def delete_post(post_id):
 
     return redirect(f"/users/{post.user_id}")
 
-app.route("/tags")
+@app.route("/tags")
 def list_tags():
     """list all tags"""
     tags = Tag.query.all()
     return render_template("tags.html", tags=tags)
+
+@app.route("/tags/<int:id>")
+def show_tag_details(id):
+    """show details about a tag"""
+    tag = Tag.query.get_or_404(id)
+    return render_template("tag_details.html", tag=tag)
