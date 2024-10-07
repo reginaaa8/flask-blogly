@@ -134,7 +134,7 @@ def delete_post(post_id):
 
     return redirect(f"/users/{post.user_id}")
 
-app.route("/tags ")
+app.route("/tags")
 def list_tags():
     """list all tags"""
     tags = Tag.query.all()
