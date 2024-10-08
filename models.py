@@ -34,7 +34,20 @@ class User(db.Model):
     def __repr__(self):
         u = self
         return f"<User id ={u.id} first_name={u.first_name} last_name={u.last_name}>"
-    
+
+# The posts_tags table is used in the back_populates parameters, so it must come before the tables posts and tags.
+
+posts_tags = db.Table(
+     'posts_tags',
+     db.Column('post_id', 
+               db.Integer, 
+               db.ForeignKey('posts.id'), primary_key=True),
+     db.Column('tag_id',
+               db.Integer, 
+               db.ForeignKey('tags.id'), 
+               primary_key=True)       
+)
+
 class Post(db.Model):
     """blog posts"""
     __tablename__ = 'posts'
@@ -56,20 +69,25 @@ class Post(db.Model):
     user_id = db.Column(db.Integer, 
                             db.ForeignKey('users.id'), 
                             nullable=False)
+    
+    tags = db.relationship('Tag', 
+                           secondary=posts_tags, 
+                        #    back_populates="parents"
+                        )
         
     def __repr__(self):
             p = self
             return f"<id ={p.id} title={p.title} created_at={p.created_at} user_id={p.user_id}>"
 
-class PostTag(db.Model):
-    """tag for a post"""
-    __tablename__ = "posts_tags"
+# # class PostTag(db.Model):
+#     """tag for a post"""
+#     __tablename__ = "posts_tags"
 
-    post_id = db.Column(db.Integer, 
-                         db.ForeignKey('posts.id'), primary_key=True)
-    tag_id = db.Column(db.Integer, 
-                        db.ForeignKey('tags.id'), 
-                        primary_key=True)
+#     post_id = db.Column(db.Integer, 
+#                          db.ForeignKey('posts.id'), primary_key=True)
+#     tag_id = db.Column(db.Integer, 
+#                         db.ForeignKey('tags.id'), 
+#                         primary_key=True)
 
 class Tag(db.Model):
      """tags for posts"""
@@ -85,7 +103,7 @@ class Tag(db.Model):
      posts = db.relationship(
           'Post', 
           secondary="posts_tags",
-          backref="tags"
+        #   back_populates="tags"
           )
     
      def __repr__(self):
