@@ -13,6 +13,13 @@
 
 <p>by {{post.user.first_name}} {{post.user.last_name}}</p>
 
+{% if post.tags %}
+<b>Tags</b>
+{% for tag in post.tags %}
+<a href="/tags/{{tag.id}}" class="badge text-bg-primary"><i>{{tag.tag_name}}</i></a>
+{% endfor %}
+
+{% endif %}
 <form action="" method="POST">
     <a href="/users/{{post.user.id}}" class="btn btn-outline-primary">Cancel</a>
     <a href="/posts/{{post.id}}/edit" class="btn btn-primary">Edit</a>

@@ -16,12 +16,26 @@
         <input id="content" name= "content" class="form-control" type="text">
     </div>
 
+    <div class="form-check">
+        {% for tag in tags %}
+        <div>
+        <input class="form-check-input"
+        type="checkbox" 
+        value="{{tag.id}}" 
+        id="tag_{{tag.id}}"
+        name="tags">
+        <label class="form-check-label" name="tag_{{tag.id}}">
+            {{tag.tag_name}}
+        </label>
+        </div>
+        {% endfor %}
+    </div>
+
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
         <a href="/users/{{user.id}}" class="btn btn-outline-info">Cancel</a>
         <button type="submit" class="btn btn-success">Add</button>
     </div>
 
 </form>
-
 
 {% endblock %}
