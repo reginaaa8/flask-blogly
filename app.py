@@ -93,8 +93,6 @@ def handle_new_post_form(user_id):
     user = User.query.get_or_404(user_id)
     tag_ids = [int(num) for num in request.form.getlist("tags")]
     tags = Tag.query.filter(Tag.id.in_(tag_ids)).all()
-
-    print(tags)
     
     
     title = request.form["title"]
@@ -120,7 +118,8 @@ def show_post(post_id):
 def edit_post(post_id):
     """show form to edit a post"""
     post = Post.query.get_or_404(post_id)
-    return render_template("edit_post.html", post=post)
+    tags = Tag.query.all()
+    return render_template("edit_post.html", post=post, tags=tags)
 
 @app.route("/posts/<int:post_id>/edit", methods=["POST"])
 def handle_edit_post_form(post_id):
@@ -128,6 +127,9 @@ def handle_edit_post_form(post_id):
     post = Post.query.get_or_404(post_id)
     post.title = request.form["title"]
     post.content = request.form["content"]
+
+    tag_ids = [int(num) for num in request.form.getlist("tags")]
+    post.tags = Tag.query.filter(Tag.id.in_(tag_ids)).all()
 
     db.session.add(post)
     db.session.commit()
@@ -194,7 +196,7 @@ def handle_edit_tag_form(id):
 @app.route("/tags/<int:id>", methods=["POST"])
 def delete_tag(id):
     "delete a tag"
-    tag = Tag.query.get_or_404(tag.id)
+    tag = Tag.query.get_or_404(id)
     
     db.session.delete(tag)
     db.session.commit()
